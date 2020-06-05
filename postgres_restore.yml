@@ -1,0 +1,10 @@
+---
+- hosts: database
+  become: true
+  tasks:
+    - name: Create backup postgresql database
+      shell: " pg_dump  -h localhost -p 5432 -U awx -F c -b -v -f /home/backups/towerDB.backup "
+      ignore_errors: yes
+
+
+
