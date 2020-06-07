@@ -1,5 +1,5 @@
 ---
-- hosts: database
+- hosts: all
   become: true
   tasks:
     - name: Create backup postgresql database
