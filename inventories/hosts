@@ -1,4 +1,7 @@
 [database]
 nodetest ansible_host=10.4.4.20
 
+[server]
+node1 ansible_host=10.4.4.10
+
 
