@@ -1,4 +1,4 @@
 [database]
-database ansible_connection=local
+nodetest ansible_host=10.4.4.20
 
-pg_password='qwerty098'
+
