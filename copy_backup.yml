@@ -1,0 +1,4 @@
+---
+- hosts: database
+  shell: " scp /home/backups/towerDB2.backup root@10.4.4.10:/home/mnoguera "
+  ignore_errors: yes 
