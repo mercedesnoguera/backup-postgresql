@@ -1,7 +1,10 @@
-[database]
+[server]
 nodetest ansible_host=10.4.4.20
 
-[server]
+[postgresql]
 node1 ansible_host=10.4.4.10
+
+[postgresqlDB2]
+node2 ansible_host=10.4.4.11
 
 
