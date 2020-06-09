@@ -5,6 +5,6 @@ nodetest ansible_host=10.4.4.20
 node1 ansible_host=10.4.4.10
 
 [postgresql2]
-node2 ansible_host=10.4.4.11
+node2 ansible_host=10.4.4.2
 
 
