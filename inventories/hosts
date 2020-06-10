@@ -1,6 +1,6 @@
 [all]
-#nodetest
-#node1
+nodetest
+node1
 node2
 
 [tower]
