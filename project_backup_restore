@@ -1,0 +1,21 @@
+---
+- hosts: postgresql1
+  become: true
+  tasks:
+    - name: Create backup postgresql database
+      shell: " pg_dump  -h 10.4.4.10 -p 5432 -U awx -F c -b -v -f /home/backup/DBTower/towerDB2.backup "
+      ignore_errors: yes
+
+- hosts: postgresql1
+  become: true
+  tasks:
+    - name: Copy file backup to server node2
+      shell: " scp /home/backup/DBTower/towerDB2.backup root@10.4.4.2:/home/restore "
+      ignore_errors: yes
+
+- hosts: postgresql2
+  become: true
+  tasks:
+    - name: Create restore postgresql database to node2
+      shell: " pg_restore -h 10.4.4.2 -p 5432 -U awx -d awx -v /home/restore/towerDB2.backup "
+      ignore_errors: yes
