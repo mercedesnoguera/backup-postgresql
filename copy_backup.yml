@@ -1,0 +1,8 @@
+---
+- hosts: postgresql1
+  become: true
+  tasks:
+    - name: Copy file backup to server node2
+      shell: " scp /home/backup/DBTower/towerDB2.backup root@10.4.4.2:/home/restore "
+      ignore_errors: yes
+
