@@ -1,7 +1,7 @@
 [all]
 #nodetest
-node1
-#node2
+#node1
+node2
 
 [tower]
 nodetest ansible_host=10.4.4.20
