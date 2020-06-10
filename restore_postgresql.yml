@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: postgresql2
   become: true
   tasks:
     - name: Create restore postgresql database to node2
