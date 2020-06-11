@@ -3,19 +3,27 @@
   become: true
   tasks:
     - name: Create backup postgresql database
-      shell: " pg_dump agencia -h 10.4.4.10 -p 5432 -U postgres -F c -b -v -f /home/backup/DBTower/towerDB2.backup "
-      ignore_errors: yes
+      shell: " pg_dump agencia -h 10.4.4.10 -p 5432 -U postgres -F c -b -v -f /home/backup/DBTower/database-agencia{{ date }}.backup "
+      vars:
+          date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
+      ignore_errors: no
+      register: command_output
+    - debug: msg="{{command_output.stdout}}"
 
 - hosts: postgresql1
   become: true
   tasks:
     - name: Copy file backup to server node2
-      shell: " scp /home/backup/DBTower/towerDB2.backup root@10.4.4.2:/home/restore "
-      ignore_errors: yes
+      shell: " scp /home/backup/DBTower/database-agencia{{ date }}.backup root@10.4.4.2:/home/restore "
+      vars:
+          date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
+      ignore_errors: no
 
 - hosts: postgresql2
   become: true
   tasks:
     - name: Create restore postgresql database to node2
-      shell: " pg_restore -h 10.4.4.2 -p 5432 -U postgres -d agencia -v /home/restore/towerDB2.backup "
-      ignore_errors: yes
+      shell: " pg_restore -h 10.4.4.2 -p 5432 -U postgres -d agencia -v /home/backup/DBTower/database-agencia{{ date }}.backup "
+      vars:
+          date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
+      ignore_errors: no
