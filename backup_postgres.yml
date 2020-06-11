@@ -4,7 +4,7 @@
   tasks:
     - name: Create backup postgresql database
       shell: " pg_dump agencia -h 10.4.4.10 -p 5432 -U postgres -F c -b -v -f /home/backup/DBTower/towerDB2.backup "
-      ignore_errors: yes
+      ignore_errors: no
 
 
 
