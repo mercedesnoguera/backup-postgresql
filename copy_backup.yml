@@ -3,6 +3,15 @@
   become: true
   tasks:
     - name: Copy file backup to server node2
-      shell: " scp /home/backup/DBTower/towerDB2.backup root@10.4.4.2:/home/restore "
+      shell: " scp /home/backup/DBTower/database-agencia{{ date }}.backup root@10.4.4.2:/home/restore "
+      vars:
+          date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
       ignore_errors: no
+
+
+
+
+
+
+   
 
