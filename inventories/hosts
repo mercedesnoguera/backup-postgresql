@@ -1,7 +1,7 @@
 [all]
-nodetest
-node1
-node2
+#nodetest
+#node1
+#node2
 nodesalud
 
 [tower]
