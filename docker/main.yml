@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: salud
   become: true
   tasks:
     - name: Create backup postgresql database "his"
@@ -10,14 +10,14 @@
       register: command_output
     - debug: msg="{{command_output.stdout}}"
 
-- hosts: all
+- hosts: salud
   become: true
   tasks:
     - name: Create database his
       shell: " docker exec postgreslab createdb -U postgres his "
       ignore_errors: no
 
-- hosts: all
+- hosts: salud
   become: true
   tasks:
     - name: Create restore postgresql database to postgreslab1
