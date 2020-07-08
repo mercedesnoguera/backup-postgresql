@@ -37,7 +37,7 @@
   become: true
   tasks:
     - name: Create restore postgresql all database to postgreslabfull
-      shell: " docker exec postgreslabfull psql -U postgres -f /var/lib/postgresql/data/backupalldatabase{{ date }}.backup "
+      shell: " docker exec postgreslabfull pg_restore -U postgres -f /var/lib/postgresql/data/backupalldatabase{{ date }}.backup "
       vars:
           date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
       ignore_errors: no
