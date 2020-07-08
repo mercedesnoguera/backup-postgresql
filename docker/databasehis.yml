@@ -14,7 +14,7 @@
   become: true
   tasks:
     - name: Copy backup in volume docker
-      shell: " docker cp home/centos/mnoguera/Docker/Postgres9.4/restore/restore-DBhis{{ date }}.backup postgreslab:/var/lib/postgresql/data/ "
+      shell: " docker cp /home/centos/mnoguera/Docker/Postgres9.4/restore/restore-DBhis{{ date }}.backup postgreslab:/var/lib/postgresql/data/ "
       vars:
           date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
       ignore_errors: no
