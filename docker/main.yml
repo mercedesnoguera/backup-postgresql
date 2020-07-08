@@ -13,6 +13,15 @@
 - hosts: salud
   become: true
   tasks:
+    - name: Copy backup in volume docker
+      shell: " docker cp home/centos/mnoguera/Docker/Postgres9.4/restore/restore-DBhis{{ date }}.backup postgreslab:/var/lib/postgresql/data/ "
+      vars:
+          date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
+      ignore_errors: no
+
+- hosts: salud
+  become: true
+  tasks:
     - name: Create database his
       shell: " docker exec postgreslab createdb -U postgres his "
       ignore_errors: no
