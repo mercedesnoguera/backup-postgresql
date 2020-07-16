@@ -14,7 +14,7 @@
   become: true
   tasks:
     - name: Copy backup in volumen docker
-      shell: " docker cp /home/centos/mnoguera/Docker/Postgres9.4/restore/backupalldatabase{{ date }}.backup postgreslab2:/var/lib/postgresql/data/ "
+      shell: " docker cp /home/centos/mnoguera/Docker/Postgres9.4/restore/backupalldatabase{{ date }}.backup postgreslab_2:/var/lib/postgresql/data/ "
       vars:
           date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
       ignore_errors: no
@@ -23,21 +23,21 @@
   become: true
   tasks:
     - name: Create database "his" in postgreslab2
-      shell: " docker exec postgreslab2 createdb -U postgres his " 
+      shell: " docker exec postgreslab_2 createdb -U postgres his " 
       ignore_errors: no
 
 - hosts: salud
   become: true
   tasks:
     - name: Create database "policia" in postgreslab2
-      shell: " docker exec postgreslab2 createdb -U postgres policia " 
+      shell: " docker exec postgreslab_2 createdb -U postgres policia " 
       ignore_errors: no
 
 - hosts: salud
   become: true
   tasks:
     - name: Create restore all database in postgreslab2
-      shell: " docker exec postgreslab2 psql -U postgres -f /var/lib/postgresql/data/backupalldatabase{{ date }}.backup "
+      shell: " docker exec postgreslab_2 psql -U postgres -f /var/lib/postgresql/data/backupalldatabase{{ date }}.backup "
       vars:
           date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
       ignore_errors: no
