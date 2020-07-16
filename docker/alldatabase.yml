@@ -2,7 +2,7 @@
 - hosts: salud
   become: true
   tasks:
-    - name: Create backup postgresql all database 
+    - name: Create backup all database 
       shell: " docker exec postgres9.4 pg_dumpall -U postgres > /home/centos/mnoguera/Docker/Postgres9.4/restore/backupalldatabase{{ date }}.backup "
       vars:
           date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
@@ -13,8 +13,8 @@
 - hosts: salud
   become: true
   tasks:
-    - name: Copy backup in volume docker
-      shell: " docker cp /home/centos/mnoguera/Docker/Postgres9.4/restore/backupalldatabase{{ date }}.backup postgreslabfull:/var/lib/postgresql/data/ "
+    - name: Copy backup in volumen docker
+      shell: " docker cp /home/centos/mnoguera/Docker/Postgres9.4/restore/backupalldatabase{{ date }}.backup postgreslab2:/var/lib/postgresql/data/ "
       vars:
           date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
       ignore_errors: no
@@ -22,22 +22,22 @@
 - hosts: salud
   become: true
   tasks:
-    - name: Create database his
-      shell: " docker exec postgreslabfull createdb -U postgres his " 
+    - name: Create database "his" in postgreslab2
+      shell: " docker exec postgreslab2 createdb -U postgres his " 
       ignore_errors: no
 
 - hosts: salud
   become: true
   tasks:
-    - name: Create database policia
-      shell: " docker exec postgreslabfull createdb -U postgres policia " 
+    - name: Create database "policia" in postgreslab2
+      shell: " docker exec postgreslab2 createdb -U postgres policia " 
       ignore_errors: no
 
 - hosts: salud
   become: true
   tasks:
-    - name: Create restore postgresql all database to postgreslabfull
-      shell: " docker exec postgreslabfull psql -U postgres -f /var/lib/postgresql/data/backupalldatabase{{ date }}.backup "
+    - name: Create restore all database in postgreslab2
+      shell: " docker exec postgreslab2 psql -U postgres -f /var/lib/postgresql/data/backupalldatabase{{ date }}.backup "
       vars:
           date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
       ignore_errors: no

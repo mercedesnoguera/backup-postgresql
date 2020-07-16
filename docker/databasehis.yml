@@ -2,7 +2,7 @@
 - hosts: salud
   become: true
   tasks:
-    - name: Create backup postgresql database "his"
+    - name: Create backup database "his" 
       shell: " docker exec postgres9.4 pg_dump his -F c -b -U postgres > /home/centos/mnoguera/Docker/Postgres9.4/restore/restore-DBhis{{ date }}.backup "
       vars:
           date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
@@ -13,8 +13,8 @@
 - hosts: salud
   become: true
   tasks:
-    - name: Copy backup in volume docker
-      shell: " docker cp /home/centos/mnoguera/Docker/Postgres9.4/restore/restore-DBhis{{ date }}.backup postgreslab:/var/lib/postgresql/data/ "
+    - name: Copy backup in volumen docker
+      shell: " docker cp /home/centos/mnoguera/Docker/Postgres9.4/restore/restore-DBhis{{ date }}.backup postgreslab1:/var/lib/postgresql/data/ "
       vars:
           date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
       ignore_errors: no
@@ -22,15 +22,15 @@
 - hosts: salud
   become: true
   tasks:
-    - name: Create database his
-      shell: " docker exec postgreslab createdb -U postgres his "
+    - name: Create database "his" in postgreslab1
+      shell: " docker exec postgreslab1 createdb -U postgres his "
       ignore_errors: no
 
 - hosts: salud
   become: true
   tasks:
-    - name: Create restore postgresql database to postgreslab1
-      shell: " docker exec postgreslab pg_restore -U postgres -d his /var/lib/postgresql/data/restore-DBhis{{ date }}.backup "
+    - name: Create restore database "his" in postgreslab1
+      shell: " docker exec postgreslab1 pg_restore -U postgres -d his /var/lib/postgresql/data/restore-DBhis{{ date }}.backup "
       vars:
           date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
       ignore_errors: no
