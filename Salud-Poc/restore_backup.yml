@@ -2,6 +2,13 @@
 - hosts: his_hbo_homologada
   become: true
   tasks:
+    - name: Create database his in his_hbo_homologada
+      shell: " psql -U datasystem -d MSPBS_HIS_HBO CREATE DATABASE his; "
+      ignore_errors: no
+
+- hosts: his_hbo_homologada
+  become: true
+  tasks:
     - name: Create restore database his
       shell: " pg_restore -h 192.168.1.22 -p 5432 -U datasystem -d MSPBS_HIS_HBO -v /home/ansible/mnoguera/backups/database-his{{ date }}.backup "
       vars:

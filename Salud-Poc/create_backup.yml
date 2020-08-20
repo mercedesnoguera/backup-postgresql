@@ -3,7 +3,7 @@
   become: true
   tasks:
     - name: Create backup database his
-      shell: " docker exec name_container pg_dump his -F c -b -U postgres > /home/ansible/mnoguera/backups/database-his{{ date }}.backup "
+      shell: " docker exec postgres9.6 pg_dump his -F c -b -U datasystem > /home/ansible/mnoguera/backups/database-his{{ date }}.backup "
       vars:
           date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
       ignore_errors: no
