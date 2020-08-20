@@ -1,0 +1,11 @@
+---
+- hosts: his_hbo_produccion
+  become: true
+  tasks:
+    - name: Copy file backup to server his_hbo_homologada
+      shell: " scp /home/ansible/mnoguera/backups/database-his{{ date }}.backup ansible@192.168.1.22:/path/to/restore "
+      vars:
+          date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
+      ignore_errors: no
+  
+
