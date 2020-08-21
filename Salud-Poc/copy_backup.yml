@@ -1,6 +1,6 @@
 ---
 - hosts: his_hbo_produccion
-  become: true
+# become: true
   tasks:
     - name: Copy file backup to server his_hbo_homologada
       shell: " scp /home/ansible/mnoguera/backups/database-his{{ date }}.backup ansible@his_hbo_homologada:/home/ansible/mnoguera/restore "
