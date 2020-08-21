@@ -3,7 +3,9 @@
   become: true
   tasks:
     - name: Create database his in his_hbo_homologada
-      shell: " psql -U datasystem < /tmp/archivo.crea.bd.sql "
+      shell: " psql -U datasystem -c 'CREATE DATABASE his{{ date }};' "
+      vars:
+          date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
       ignore_errors: no
 
 - hosts: his_hbo_homologada
