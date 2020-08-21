@@ -3,7 +3,7 @@
   become: true
   tasks:
     - name: Copy file backup to server his_hbo_homologada
-      shell: " scp /home/ansible/mnoguera/backups/database-his{{ date }}.backup ansible@192.168.1.22:/home/ansible/mnoguera/restore "
+      shell: " scp /home/ansible/mnoguera/backups/database-his{{ date }}.backup ansible@his_hbo_homologada:/home/ansible/mnoguera/restore "
       vars:
           date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
       ignore_errors: no
