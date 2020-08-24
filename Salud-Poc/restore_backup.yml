@@ -1,6 +1,7 @@
 ---
 - hosts: his_hbo_homologada
   become: true
+  become_user: datasystem
   tasks:
     - name: Create database his in his_hbo_homologada
       shell: " psql -U datasystem < /tmp/archivo.crea.bd.sql "
