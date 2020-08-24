@@ -11,7 +11,7 @@
   become: true
   tasks:
     - name: Create restore database his
-      shell: " pg_restore -h his_hbo_homologada -p 5432 -U datasystem -d his20200821_2 -v /home/ansible/mnoguera/backups/database-his{{ date }}.backup "
+      shell: " pg_restore -h his_hbo_homologada -p 5432 -U datasystem -d his20200821_2 -v /home/ansible/mnoguera/restore/database-his{{ date }}.backup "
       vars:
           date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
       ignore_errors: no
