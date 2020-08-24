@@ -8,11 +8,11 @@
       ignore_errors: no
 
 - hosts: his_hbo_homologada
-# become: true
+  become: true
   tasks:
     - name: Create restore database his
-      shell: " pg_restore -h 192.168.1.22 -p 5432 -U datasystem -d ansible -v /home/ansible/mnoguera/restore/database-his20200821.backup "
-#     vars:
-#         date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
+      shell: " pg_restore -h 192.168.1.22 -p 5432 -U datasystem -d ansible -v /home/ansible/mnoguera/restore/database-his{{date}}.backup "
+      vars:
+          date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
       ignore_errors: no
 
