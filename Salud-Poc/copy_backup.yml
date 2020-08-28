@@ -1,10 +1,10 @@
 ---
 - hosts: his_hbo_produccion
   become: true
-  become_user: datasystem
+  become_user: ansible
   tasks:
     - name: Copy file backup to server his_hbo_homologada
-      shell: " scp /home/ansible/mnoguera/backups/database-his{{ date }}.backup ansible@his_hbo_homologada:/home/datasystem/mnoguera/restore "
+      shell: " scp /home/ansible/mnoguera/backups/database-his{{ date }}.backup datasystem@his_hbo_homologada:/home/datasystem/mnoguera/restore "
       vars:
           date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
       ignore_errors: no
