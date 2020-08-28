@@ -1,11 +1,11 @@
 ---
-- hosts: his_hbo_homologada
-  become: true
-  become_user: datasystem
-  tasks:
-    - name: Drop database his in his_hbo_homologada
-      shell: " psql -U datasystem < /tmp/archivo.elimina.bd.sql "
-      ignore_errors: no
+#- hosts: his_hbo_homologada
+#  become: true
+#  become_user: datasystem
+#  tasks:
+#    - name: Drop database his in his_hbo_homologada
+#      shell: " psql -U datasystem < /tmp/archivo.elimina.bd.sql "
+#      ignore_errors: no
 
 - hosts: his_hbo_homologada
   become: true
