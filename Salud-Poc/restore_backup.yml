@@ -3,6 +3,14 @@
   become: true
   become_user: datasystem
   tasks:
+    - name: Drop database his in his_hbo_homologada
+      shell: " psql -U datasystem < /tmp/archivo.elimina.bd.sql "
+      ignore_errors: no
+
+- hosts: his_hbo_homologada
+  become: true
+  become_user: datasystem
+  tasks:
     - name: Create database his in his_hbo_homologada
       shell: " psql -U datasystem < /tmp/archivo.crea.bd.sql "
       ignore_errors: no
@@ -12,7 +20,7 @@
   become_user: datasystem
   tasks:
     - name: Create restore database his
-      shell: " pg_restore -h 192.168.1.22 -p 5432 -U datasystem -d his{{date}} -v /home/datasystem/mnoguera/restore/database-his{{date}}.backup "
+      shell: " pg_restore -h 192.168.1.22 -p 5432 -U datasystem -d his-datasystem -v /home/datasystem/mnoguera/restore/database-his{{date}}.backup "
       vars:
           date: "{{ lookup('pipe', 'date +%Y%m%d') }}"
       ignore_errors: no
